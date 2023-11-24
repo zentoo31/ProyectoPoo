@@ -28,6 +28,7 @@ public class Principal {
         //String contraseña = "contraseña123";
         //String xd = BCrypt.withDefaults().hashToString(12, contraseña.toCharArray());
         //System.out.println(xd);
+        //xd
         
         
     }
