@@ -7,10 +7,11 @@ package Vista;
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.intellijthemes.FlatVuesionIJTheme;
+import com.mxrck.autocompleter.TextAutoCompleter;
 import controlador.Producto;
+import controlador.RegistroEntregas;
 import controlador.Reporteria;
 import controlador.Usuario;
-import java.awt.Color;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +25,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.UIManager;
-
 /**
  *
  * @author zento
@@ -32,7 +32,7 @@ import javax.swing.UIManager;
 public class Frame extends javax.swing.JFrame {
 
     private Usuario user;
-
+    
     /**
      * Creates new form Frame
      */
@@ -40,6 +40,7 @@ public class Frame extends javax.swing.JFrame {
     public Frame(Usuario usuario) {
         this.user = usuario;
         initComponents();
+        CargarSugerencias();
         //Se crea el modelo de tabla para el JTABLE
         ActualizarTabla();
         ponerElementosPanel();
@@ -65,6 +66,23 @@ public class Frame extends javax.swing.JFrame {
 
         jFrame1 = new javax.swing.JFrame();
         jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel5 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        btnAgregar1 = new javax.swing.JButton();
+        txtNombreProducto = new javax.swing.JTextField();
+        txtNombreEstudiante = new javax.swing.JTextField();
+        jLabel28 = new javax.swing.JLabel();
+        txtNombre1 = new javax.swing.JTextField();
+        jLabel30 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
+        jLabel34 = new javax.swing.JLabel();
+        jLabel35 = new javax.swing.JLabel();
+        jLabel36 = new javax.swing.JLabel();
+        jLabel37 = new javax.swing.JLabel();
+        jLabel41 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jLabel24 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         btnAgregar = new javax.swing.JButton();
@@ -92,6 +110,7 @@ public class Frame extends javax.swing.JFrame {
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
@@ -131,6 +150,92 @@ public class Frame extends javax.swing.JFrame {
         jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
         jTabbedPane1.setForeground(new java.awt.Color(0, 0, 0));
         jTabbedPane1.setOpaque(false);
+
+        jPanel5.setOpaque(false);
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel6.setOpaque(false);
+        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnAgregar1.setBackground(new java.awt.Color(255, 0, 0));
+        btnAgregar1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnAgregar1.setForeground(new java.awt.Color(0, 0, 0));
+        btnAgregar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/Agregar.png"))); // NOI18N
+        btnAgregar1.setToolTipText("");
+        btnAgregar1.setBorderPainted(false);
+        btnAgregar1.setContentAreaFilled(false);
+        btnAgregar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAgregar1.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/Agregar1.png"))); // NOI18N
+        btnAgregar1.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/Agregar1.png"))); // NOI18N
+        btnAgregar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregar1ActionPerformed(evt);
+            }
+        });
+        jPanel6.add(btnAgregar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 130, 170, 70));
+
+        txtNombreProducto.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel6.add(txtNombreProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 110, 140, 30));
+
+        txtNombreEstudiante.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel6.add(txtNombreEstudiante, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, 140, 30));
+
+        jLabel28.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel28.setText("Producto:");
+        jPanel6.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 110, 70, 20));
+
+        txtNombre1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel6.add(txtNombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 170, 140, 30));
+
+        jLabel30.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel30.setText("Estudiante:");
+        jPanel6.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, -1, -1));
+
+        jLabel31.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel31.setText("Cantidad:");
+        jPanel6.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 180, -1, -1));
+
+        jLabel34.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/logo-ucv-corto.png"))); // NOI18N
+        jPanel6.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(801, 6, -1, 31));
+
+        jLabel35.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel35.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/Relleno.png"))); // NOI18N
+        jPanel6.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 100, 160, 50));
+
+        jLabel36.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel36.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/Relleno.png"))); // NOI18N
+        jPanel6.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, 160, 50));
+
+        jLabel37.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel37.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/Relleno.png"))); // NOI18N
+        jPanel6.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 160, 160, 50));
+
+        jLabel41.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel41.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel41.setText("Registro de entrega de farmaceúticos");
+        jPanel6.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
+        jPanel5.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 840, 280));
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable2);
+
+        jPanel5.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 820, 350));
+
+        jLabel24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/fondo.png"))); // NOI18N
+        jPanel5.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 880, 660));
+
+        jTabbedPane1.addTab("ENTREGA", jPanel5);
 
         jPanel1.setOpaque(false);
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -312,6 +417,11 @@ public class Frame extends javax.swing.JFrame {
         jLabel23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/Relleno.png"))); // NOI18N
         jPanel2.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 120, 160, 50));
 
+        jLabel26.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel26.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel26.setText("Gestión de inventario");
+        jPanel2.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 840, 280));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -343,7 +453,7 @@ public class Frame extends javax.swing.JFrame {
                 jToggleButton3ActionPerformed(evt);
             }
         });
-        jPanel4.add(jToggleButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 10, -1, -1));
+        jPanel4.add(jToggleButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 80, -1, -1));
 
         jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/fondo.png"))); // NOI18N
         jPanel4.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 880, 660));
@@ -578,6 +688,10 @@ public class Frame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCategoriaActionPerformed
 
+    private void btnAgregar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAgregar1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -652,10 +766,26 @@ public class Frame extends javax.swing.JFrame {
         jTable1.setModel(model);
         jTable1.setDefaultEditor(Object.class, null);
     }
+    
+    public void CargarSugerencias(){
+        //Se establece variable de tipo TextAutoCopleter para los productos
+        TextAutoCompleter textAutoAcompleter = new TextAutoCompleter(txtNombre);
+        ArrayList<String>ListaNombreProducto = Producto.obtenerSoloNombres();
+        textAutoAcompleter.addItems(ListaNombreProducto.toArray());
+        //Se establece el textautocompleter para los productos en el modulo de entregas
+        TextAutoCompleter textAutoAcompleter3 = new TextAutoCompleter(txtNombreProducto);
+        textAutoAcompleter3.addItems(ListaNombreProducto.toArray());
+        
+        //Se establece variable de tipo TextAutocompleter para los nombres de estudiantes
+        TextAutoCompleter textAutoAcompleter2 = new TextAutoCompleter(txtNombreEstudiante);
+        ArrayList<String> ListaNombreEstudiante = RegistroEntregas.obtenerNombresEstudiantes();
+        textAutoAcompleter2.addItems(ListaNombreEstudiante.toArray());
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnAgregar1;
     private javax.swing.JButton btnEliminar;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JFrame jFrame1;
@@ -675,8 +805,18 @@ public class Frame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -686,9 +826,13 @@ public class Frame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JToggleButton jToggleButton2;
     private javax.swing.JToggleButton jToggleButton3;
@@ -698,6 +842,9 @@ public class Frame extends javax.swing.JFrame {
     private javax.swing.JButton txtConsultar;
     private javax.swing.JButton txtLimpiar;
     private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtNombre1;
+    private javax.swing.JTextField txtNombreEstudiante;
+    private javax.swing.JTextField txtNombreProducto;
     private javax.swing.JTextField txtUnidad;
     // End of variables declaration//GEN-END:variables
 }

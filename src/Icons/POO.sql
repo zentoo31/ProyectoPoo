@@ -1,5 +1,9 @@
 create database UCV
 go
+
+use ucv
+go
+
 --Creacion de tabla usuarios 
 create table UCV..Usuarios(
 	ID int identity,
@@ -8,7 +12,6 @@ create table UCV..Usuarios(
 	Usuario varchar(100) not null,
 	Contraseña varchar(100) not null,
 	FechaRegistro varchar(100) not null
-
 	constraint pk_ID primary key (ID)
 );
 go
@@ -24,9 +27,6 @@ go
 select * from UCV..Usuarios
 go
 
-select * from UCV..Usuarios
-where Usuario = 'juan123'
-go
 
 --Creacion de tabla producto 
 create table UCV..Producto(
@@ -50,5 +50,68 @@ insert into UCV..Producto(codigo,nombre,cantidad,unidad,vencimiento,categoria)
 values('A003','Antibiótico Amoxicilina',50,'Cápsula','2025-06-30','Antibiotico')
 go
 
-select * from UCV..Producto
+select nombre from UCV..Producto
 go
+
+--Creacion de tabla de estudiantes
+
+create table UCV..Estudiantes(
+    ID int identity,
+    Nombres varchar(50) not null,
+    Matricula varchar(100) not null,
+    FechaRegistro varchar(100) not null,
+    constraint pk_ID_estudiante primary key (ID)
+);
+
+
+insert into UCV..Estudiantes(Nombres, Matricula, FechaRegistro)
+values('García López Juan Carlos', '20230001', '01-02-2023');
+
+insert into UCV..Estudiantes(Nombres, Matricula, FechaRegistro)
+values('Rodríguez Sánchez María José', '20230002', '15-03-2023');
+
+insert into UCV..Estudiantes(Nombres, Matricula, FechaRegistro)
+values('Martínez González Carlos Andrés', '20230002', '15-03-2023');
+
+insert into UCV..Estudiantes(Nombres, Matricula, FechaRegistro)
+values('Pérez Ramírez Laura Sofía', '20230002', '15-03-2023');
+
+insert into UCV..Estudiantes(Nombres, Matricula, FechaRegistro)
+values('González Torres José Luis', '20230001', '01-02-2023');
+
+insert into UCV..Estudiantes(Nombres, Matricula, FechaRegistro)
+values('Sánchez Díaz Ana Gabriela', '20230001', '01-02-2023');
+
+insert into UCV..Estudiantes(Nombres, Matricula, FechaRegistro)
+values('Romero Vargas Luis Eduardo', '20220002', '15-03-2023');
+
+insert into UCV..Estudiantes(Nombres, Matricula, FechaRegistro)
+values('Díaz Herrera Paola Alejandra', '20220002', '15-03-2023');
+
+select * from Estudiantes
+go
+
+--Creacion de tabla de registroDeEntregas
+
+create table UCV..RegistroEntregas(
+    ID int identity,
+    EstudianteID int not null,
+    ProductoCodigo varchar(50) not null,
+    CantidadEntregada int not null,
+    FechaEntrega varchar(50) not null,
+	constraint fk_farmaceuticoID foreign key (ProductoCodigo) references UCV..Producto(codigo),
+	constraint fk_EstudianteID foreign key (EstudianteID) references UCV..Estudiantes(ID)
+);
+
+insert into UCV..RegistroEntregas(EstudianteID, ProductoCodigo, CantidadEntregada, FechaEntrega)
+values(1, 'A001', 2, '02-11-2023');
+
+insert into UCV..RegistroEntregas(EstudianteID, ProductoCodigo, CantidadEntregada, FechaEntrega)
+values(2, 'A002', 1, '16-11-2023');
+
+Select * from RegistroEntregas
+go
+
+
+
+

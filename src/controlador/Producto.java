@@ -132,6 +132,20 @@ public class Producto {
         return listaproducto;
     }
     
+   public static ArrayList<String> obtenerSoloNombres() {
+        ArrayList<String> listaproducto = new ArrayList<>();
+        try{
+            Connection conexion = ConexionSQL.obtenerConexion();
+            PreparedStatement consulta = conexion.prepareStatement("SELECT nombre FROM Producto");
+            ResultSet resultSet = consulta.executeQuery();
+            while (resultSet.next()) {
+                listaproducto.add(resultSet.getString("nombre"));
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return listaproducto;
+    }
    
  //metodo para eliminar producto en la base de datos
     public void eliminarProductoEnBD() {
