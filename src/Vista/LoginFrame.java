@@ -61,7 +61,7 @@ public class LoginFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        ImageIcon icon = new ImageIcon(getClass().getResource("/Icons/Sin_título-removebg-preview.png"));
+        ImageIcon icon = new ImageIcon(getClass().getResource("/Icons/Logo_e_farma.png"));
         setIconImage(icon.getImage());
         setTitle("Gestion de inventario");
         jPanel2 = new javax.swing.JPanel();
@@ -115,7 +115,6 @@ public class LoginFrame extends javax.swing.JFrame {
         jPanel3.add(btnIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 310, 180, 80));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Contraseña:");
         jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, -1, -1));
@@ -131,7 +130,6 @@ public class LoginFrame extends javax.swing.JFrame {
         jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 20, 80, 90));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Nombre de usuario:");
         jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, 140, -1));
