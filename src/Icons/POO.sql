@@ -112,6 +112,9 @@ values(2, 'A002', 1, '16-11-2023');
 Select * from RegistroEntregas
 go
 
+SELECT r.*, e.Nombres AS NombresEstudiante FROM RegistroEntregas r JOIN Estudiantes e ON r.EstudianteID = e.ID
+go
+
 
 
 

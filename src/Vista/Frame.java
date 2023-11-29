@@ -72,7 +72,7 @@ public class Frame extends javax.swing.JFrame {
         txtNombreProducto = new javax.swing.JTextField();
         txtNombreEstudiante = new javax.swing.JTextField();
         jLabel28 = new javax.swing.JLabel();
-        txtNombre1 = new javax.swing.JTextField();
+        txtCantidadEstudiante = new javax.swing.JTextField();
         jLabel30 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
@@ -81,7 +81,7 @@ public class Frame extends javax.swing.JFrame {
         jLabel37 = new javax.swing.JLabel();
         jLabel41 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tableEntrega = new javax.swing.JTable();
         jLabel24 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -184,8 +184,8 @@ public class Frame extends javax.swing.JFrame {
         jLabel28.setText("Producto:");
         jPanel6.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 110, 70, 20));
 
-        txtNombre1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel6.add(txtNombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 170, 140, 30));
+        txtCantidadEstudiante.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel6.add(txtCantidadEstudiante, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 170, 140, 30));
 
         jLabel30.setForeground(new java.awt.Color(255, 255, 255));
         jLabel30.setText("Estudiante:");
@@ -217,7 +217,7 @@ public class Frame extends javax.swing.JFrame {
 
         jPanel5.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 840, 280));
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tableEntrega.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -228,7 +228,7 @@ public class Frame extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(tableEntrega);
 
         jPanel5.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 820, 350));
 
@@ -422,7 +422,7 @@ public class Frame extends javax.swing.JFrame {
         jLabel26.setText("Gestión de inventario");
         jPanel2.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 840, 280));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 860, 280));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -453,7 +453,7 @@ public class Frame extends javax.swing.JFrame {
                 jToggleButton3ActionPerformed(evt);
             }
         });
-        jPanel4.add(jToggleButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 80, -1, -1));
+        jPanel4.add(jToggleButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 20, -1, -1));
 
         jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/fondo.png"))); // NOI18N
         jPanel4.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 880, 660));
@@ -689,7 +689,14 @@ public class Frame extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCategoriaActionPerformed
 
     private void btnAgregar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregar1ActionPerformed
-        // TODO add your handling code here:
+        String nombreEs = txtNombreEstudiante.getText();
+        String nombreProd = txtNombreProducto.getText();
+        String cantidad = txtCantidadEstudiante.getText();
+
+        RegistroEntregas reg = new RegistroEntregas(nombreEs, nombreProd, Integer.parseInt(cantidad));
+        reg.guardarRegistroEnBD();
+        ActualizarTabla();
+        LimpiarCampos();
     }//GEN-LAST:event_btnAgregar1ActionPerformed
 
     /**
@@ -725,6 +732,9 @@ public class Frame extends javax.swing.JFrame {
         txtUnidad.setText("");
         jDateChooser1.setDate(null);
         txtCategoria.setText("");
+        txtNombreEstudiante.setText("");
+        txtNombreProducto.setText("");
+        txtCantidadEstudiante.setText("");
     }
 
     public void DeshabilitarBoton() {
@@ -765,6 +775,28 @@ public class Frame extends javax.swing.JFrame {
         // Establecer el modelo de la tabla (jTable1) con los datos actualizados
         jTable1.setModel(model);
         jTable1.setDefaultEditor(Object.class, null);
+        
+        DefaultTableModel model2 = new DefaultTableModel();
+        model2.addColumn("ID");
+        model2.addColumn("Estudiante");
+        model2.addColumn("Codigo Producto");
+        model2.addColumn("Cantidad entregada");
+        model2.addColumn("Fecha entregada");
+        
+        List<RegistroEntregas> registroEntrega = RegistroEntregas.obtenerRegistrosDesdeBD();
+        
+        for(RegistroEntregas registro : registroEntrega){
+            model2.addRow(new Object[]{
+                registro.getID(),
+                registro.getNombredeEstudiante(),
+                registro.getProductoCodigo(),
+                registro.getCantidadEntregada(),
+                registro.getFechaEntrega()
+            });
+        }
+        
+        tableEntrega.setModel(model2);
+        tableEntrega.setDefaultEditor(Object.class, null);
     }
     
     public void CargarSugerencias(){
@@ -832,17 +864,17 @@ public class Frame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JToggleButton jToggleButton2;
     private javax.swing.JToggleButton jToggleButton3;
+    private javax.swing.JTable tableEntrega;
     private javax.swing.JTextField txtCantidad;
+    private javax.swing.JTextField txtCantidadEstudiante;
     private javax.swing.JTextField txtCategoria;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JButton txtConsultar;
     private javax.swing.JButton txtLimpiar;
     private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtNombre1;
     private javax.swing.JTextField txtNombreEstudiante;
     private javax.swing.JTextField txtNombreProducto;
     private javax.swing.JTextField txtUnidad;

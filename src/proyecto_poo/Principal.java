@@ -26,7 +26,7 @@ public class Principal {
             }
         });
         //xd
-        //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
+        //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
         //String contraseña = "contraseña123";
         //String xd = BCrypt.withDefaults().hashToString(12, contraseña.toCharArray());
         //System.out.println(xd);
